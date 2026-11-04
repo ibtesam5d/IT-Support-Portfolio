@@ -142,7 +142,7 @@ I tested TCP port 8000 from Windows before adding a firewall rule. The connectio
 I then added a restricted firewall permission:
 
 ```
-sudo ufw allow from WINDOWS_IP to any port 8000 proto tcp
+sudo ufw allow from WINDOWS-IP to any port 8000 proto tcp
 ```
 
 Repeating the Windows connectivity test produced:
@@ -236,11 +236,11 @@ PubkeyAuthentication yes
 
 These settings:
 
-Prevent direct SSH login as root.
+- Prevent direct SSH login as root.
 
-Disable password-based SSH authentication.
+- Disable password-based SSH authentication.
 
-Retain public-key authentication.
+- Retain public-key authentication.
 
 Before applying the changes, I validated the configuration:
 
