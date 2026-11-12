@@ -1,26 +1,24 @@
-#Lab 4: Linux Firewall Configuration and SSH Hardening
+# Lab 4: Linux Firewall Configuration and SSH Hardening
 
-##1. Objective
+## 1. Objective
+
 The objective of this lab was to learn how to configure a Linux firewall, restrict inbound network access, understand TCP connectivity, and harden an SSH server using key-based authentication.
 
 The lab focused on applying practical security controls and verifying their effectiveness through testing from a Windows client.
 
-##2. Lab Environment
+## 2. Lab Environment
 
-| Component               | Configuration                     |
-| ----------------------- | --------------------------------- |
-| Host Operating System   | Windows 10                        |
-| Virtualization software | VMware Workstation 17 Player      |
-| Virtual Machine         | Linux Mint 22.3                   |
-| Network Mode            | VMware NAT                        |
-| Firewall                | UFW                               |
-| Remote Access Service   | OpenSSH                           |
-| SSH Port                | TCP 22                            |
-| SSH Client              | Windows OpenSSH Client            |
-| Authentication method   | Ed25519 public-key-authentication |
-| ----------------------- | --------------------------------- |
+- Host Operating System: Windows 10
+- Virtualization software: VMware Workstation Player
+- Virtual Machine: Linux Mint
+- Network Mode: VMware NAT
+- Firewall: UFW
+- Remote Access Service: OpenSSH
+- SSH Port: TCP 22
+- SSH Client: Windows OpenSSH Client
+- Authentication method: Ed25519 public-key-authentication
 
-##3. Initial Firewall and SSH Assessment
+## 3. Initial Firewall and SSH Assessment
 
 First, I inspected the existing firewall configuration:
 
@@ -46,7 +44,8 @@ sudo ufw app list
 
 The OpenSSH profile was available.
 
-##4. Firewall Configuration Using UFW
+## 4. Firewall Configuration Using UFW
+
 I configured UFW to allow SSH and enabled the firewall:
 
 ```
@@ -81,19 +80,16 @@ sudo ufw status verbose
 The resulting configuration was:
 
 - Firewall active.
-
 - Default incoming policy: deny.
-
 - Default outgoing policy: allow.
-
 - SSH permitted only from the specified Windows VMnet8 IP.
-
 - No broad SSH permissions for IPv4 or IPv6.
 
-##5. Network Connectivity and Firewall Testing
+## 5. Network Connectivity and Firewall Testing
+
 I used Windows PowerShell's Test-NetConnection utility to test connectivity to the Linux VM.
 
-###SSH connectivity test
+### SSH connectivity test
 
 ```
 Test-NetConnection Linux-VM-IP -Port 22
@@ -103,7 +99,7 @@ TcpTestSucceeded: True
 
 This confirmed that SSH remained accessible from the authorized Windows client after restricting the firewall rule.
 
-###HTTP port 80 test
+### HTTP port 80 test
 
 ```
 Test-NetConnection Linux-VM-IP -Port 80
@@ -117,7 +113,7 @@ I inspected listening TCP ports and confirmed that no service was listening on p
 
 This demonstrated that network reachability does not necessarily mean an application is accepting connections on a particular port.
 
-###Temporary Python HTTP server
+### Temporary Python HTTP server
 
 To investigate the relationship between listening services and firewall permissions, I created a temporary HTTP server:
 
@@ -149,11 +145,11 @@ Repeating the Windows connectivity test produced:
 
 `TcpTestSucceeded: True`
 
-After testing, I stopped the temporary Python server using Ctrl+C and removed the temporary firewall rule.
+After testing, I stopped the temporary Python server using `Ctrl+C` and removed the temporary firewall rule.
 
 This exercise demonstrated the difference between a running service, firewall permissions, and network reachability.
 
-##6. SSH Key-Based Authentication
+## 6. SSH Key-Based Authentication
 
 I investigated the SSH server's effective configuration:
 
@@ -205,7 +201,8 @@ ssh -v mint@Linux-VM-IP
 
 The output confirmed successful public-key authentication.
 
-##7. SSH Server Hardening
+## 7. SSH Server Hardening
+
 Before modifying the configuration, I inspected the main SSH configuration file:
 
 ```
@@ -237,9 +234,7 @@ PubkeyAuthentication yes
 These settings:
 
 - Prevent direct SSH login as root.
-
 - Disable password-based SSH authentication.
-
 - Retain public-key authentication.
 
 Before applying the changes, I validated the configuration:
@@ -270,7 +265,7 @@ I then reloaded the SSH service:
 sudo systemctl reload ssh
 ```
 
-##8. SSH Authentication Verification
+## 8. SSH Authentication Verification
 
 I opened a new Windows PowerShell session and tested SSH authentication:
 
@@ -297,50 +292,34 @@ sudo systemctl status ssh
 The service reported:
 `Active: active (running)`
 
-##9. Key Troubleshooting Lessons
+## 9. Key Troubleshooting Lessons
+
 Through this lab, I learned several important troubleshooting concepts:
 
 - A firewall permission does not automatically mean a service is listening on that port.
-
 - A listening service does not guarantee successful connectivity if firewall rules block the traffic.
-
 - Successful ping tests do not guarantee successful TCP connections.
-
 - SSH network access restrictions and SSH authentication controls are separate security layers.
-
 - Public-key authentication can provide stronger protection than password-only authentication.
-
 - SSH configuration should be validated before reloading the service.
-
 - Existing remote sessions should be retained until a new connection has been tested successfully.
-
 - Temporary services and firewall permissions should be removed after completing testing.
 
-##10. Skills Demonstrated
+## 10. Skills Demonstrated
 
 - Linux command-line administration.
-
 - UFW firewall configuration and troubleshooting.
-
 - TCP/IP connectivity testing.
-
 - Network access control and source-IP restrictions.
-
 - OpenSSH server configuration.
-
 - SSH key generation and public-key authentication.
-
 - Linux file and directory permissions.
-
 - Windows PowerShell networking utilities.
-
 - Service inspection and management using systemd.
-
 - Security hardening and configuration validation.
-
 - Technical troubleshooting and verification.
 
-##11. Conclusion
+## 11. Conclusion
 
 This lab provided hands-on experience configuring a Linux firewall and securing remote SSH access.
 

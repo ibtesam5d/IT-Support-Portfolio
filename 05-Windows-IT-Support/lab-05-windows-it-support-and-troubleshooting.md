@@ -1,6 +1,6 @@
-#Lab 5: Windows IT Support and Troubleshooting
+# Lab 5: Windows IT Support and Troubleshooting
 
-##1. Lab Overview
+## 1. Lab Overview
 
 Objective: Practice practical Windows IT support and troubleshooting techniques, including system inspection, resource monitoring, Windows service management, Event Viewer analysis, application troubleshooting, and network diagnostics.
 
@@ -13,15 +13,15 @@ Environment:
 - Virtualization: Enabled
 - Tools: Task Manager, System Information, Event Viewer, Services console, PowerShell
 
-##2. System Information and Hardware Inspection
+## 2. System Information and Hardware Inspection
 
-###Tasks performed
+### Tasks performed
 
 - Opened System Information (msinfo32).
 - Inspected Windows version using winver.
 - Identified CPU, installed memory, and system specifications.
 
-###Findings
+### Findings
 
 - Windows 10 Home, Version 22H2.
 - OS Build 19045.
@@ -29,20 +29,20 @@ Environment:
 - 4 physical cores and 8 logical processors.
 - 8 GB installed RAM.
 
-###Skills demonstrated
+### Skills demonstrated
 
 - Identifying hardware and operating system specifications.
 - Gathering system information for troubleshooting and support documentation.
 
-##3. Performance Monitoring
+## 3. Performance Monitoring
 
-###Tasks performed
+### Tasks performed
 
 - Used Task Manager to inspect CPU, memory, disk, and network utilization.
 - Sorted running processes by memory usage.
 - Observed Resource Monitor behavior during normal system activity.
 
-###Observations
+### Observations
 
 - CPU utilization was generally between 5% and 9%, with occasional spikes.
 - Memory usage was approximately 4.2 GB, with around 1.7 GB available during one observation.
@@ -50,48 +50,48 @@ Environment:
 - Microsoft Defender and Windows Explorer were also visible in the process list.
 - Chrome's multiple processes were consistent with its multi-process architecture.
 
-###Analysis
+### Analysis
 
 Memory availability was relatively limited, but the observations alone did not establish a memory-related performance fault.
 
 A proper diagnosis would require correlating user-reported symptoms with memory pressure, disk activity, paging, and process behavior.
 
-###Skills demonstrated
+### Skills demonstrated
 
 - Monitoring system resource utilization.
 - Identifying resource-intensive processes.
 - Distinguishing normal operating behavior from potential performance problems.
 
-##4. Windows Services Investigation
+## 4. Windows Services Investigation
 
-###Tasks performed
+### Tasks performed
 
 - Opened the Services management console (services.msc).
 - Inspected the DHCP Client service.
 - Used PowerShell to inspect service status and configuration.
 
-###Findings
+### Findings
 
 - DHCP Client service was running.
 - Startup type was Automatic.
 
-###Analysis
+### Analysis
 
 The DHCP Client service helps Windows obtain and maintain network configuration information, including IP addressing and related network settings.
 
-###Skills demonstrated
+### Skills demonstrated
 
 - Inspecting Windows services.
 - Understanding service status and startup types.
 - Using PowerShell to gather service information.
 
-##5. Event Viewer Investigation — Dropbox Updater
+## 5. Event Viewer Investigation — Dropbox Updater
 
-###Objective
+### Objective
 
 Investigate recurring Windows service errors and determine whether they represented an active application problem.
 
-###Tools used
+### Tools used
 
 - Event Viewer (eventvwr.msc)
 - Services console (services.msc)
@@ -101,7 +101,7 @@ Investigate recurring Windows service errors and determine whether they represen
   - Get-Process
   - Test-Path
 
-###Findings
+### Findings
 
 During inspection of the Windows System event log, the following events were observed:
 
@@ -119,7 +119,7 @@ The service had the following characteristics:
 - Executable file existence: Confirmed using Test-Path
 - The same service error appeared repeatedly in historical event logs.
 
-###Troubleshooting performed
+### Troubleshooting performed
 
 - Identified the service associated with Event ID 7024.
 - Inspected its status and startup configuration.
@@ -129,7 +129,7 @@ The service had the following characteristics:
 - Confirmed that Dropbox reported its synchronization status as "Up to date."
 - Inspected related Dropbox processes using PowerShell
 
-###Conclusion
+### Conclusion
 
 The Dropbox application appeared to function normally during testing. However, recurring historical updater service errors were identified.
 
@@ -139,19 +139,19 @@ The issue was documented for monitoring rather than making unnecessary changes t
 
 Troubleshooting lesson: An error in Event Viewer does not automatically mean an application is currently broken. Correlate logs with service status, application behavior, and user impact before changing system configuration.
 
-##6. Windows Network Diagnostics
+## 6. Windows Network Diagnostics
 
-###Objective
+### Objective
 
 Inspect network configuration and test DNS resolution and TCP connectivity.
 
-###Tools used
+### Tools used
 
 - ipconfig /all
 - nslookup
 - Test-NetConnection
 
-###Findings
+### Findings
 
 IP configuration
 
@@ -192,7 +192,7 @@ TcpTestSucceeded : True
 
 This confirmed that a TCP connection to Google's HTTPS port (443) could be established.
 
-###Analysis
+### Analysis
 
 The tests demonstrated that:
 
@@ -208,7 +208,7 @@ Skills demonstrated
 - Testing TCP connectivity to a specific port.
 - Interpreting command-line diagnostic results.
 
-##7. Troubleshooting Knowledge Check
+## 7. Troubleshooting Knowledge Check
 
 Scenario: A user can access a website using its IP address but cannot access it using its domain name.
 
@@ -218,21 +218,23 @@ Reasoning: Successful access by IP suggests that basic IP connectivity may be wo
 
 This demonstrates symptom-based troubleshooting rather than randomly changing network settings.
 
-##8. Key Commands Reference
-|Command | Purpose |
-|msiinfo32 | Open detailed system information |
-|winver | Check windows version and build |
-|services.msc | Open windows services |
-|eventvwr.msc | Open Event Viwer |
-|ipconfig /all | Inspect complete network configuration |
-|nslookup google.com | Test DNS resolution |
-|Test-NetConnection google.com -Port 443 | Test TCP connectivity |
-|Get-Service | Inspect windows services |
-|Get-CimInstance win32_service | Inspect detailed service configuration |
-|Get-Process | Inspect running processes |
-|Test-Path | Check whether a file or directory exists|
+## 8. Key Commands Reference
 
-##9. Skills and Competencies Developed
+| Command                                 | Purpose                                  |
+| --------------------------------------- | ---------------------------------------- |
+| msinfo32                                | Open detailed system information         |
+| winver                                  | Check Windows version and build          |
+| services.msc                            | Open Windows Services                    |
+| eventvwr.msc                            | Open Event Viewer                        |
+| ipconfig /all                           | Inspect complete network configuration   |
+| nslookup google.com                     | Test DNS resolution                      |
+| Test-NetConnection google.com -Port 443 | Test TCP connectivity                    |
+| Get-Service                             | Inspect Windows Services                 |
+| Get-CimInstance Win32_service           | Inspect detailed service configuration   |
+| Get-Process                             | Inspect running processes                |
+| Test-Path                               | Check whether a file or directory exists |
+
+## 9. Skills and Competencies Developed
 
 - Windows operating system administration fundamentals.
 - Hardware and system information inspection.
@@ -244,7 +246,7 @@ This demonstrates symptom-based troubleshooting rather than randomly changing ne
 - TCP connectivity testing.
 - Evidence-based troubleshooting and documentation.
 
-##10. Final Reflection
+## 10. Final Reflection
 
 This lab provided hands-on experience with common Windows IT support tasks.
 

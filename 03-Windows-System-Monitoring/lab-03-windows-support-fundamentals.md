@@ -1,27 +1,28 @@
-#Lab 3: Windows Support Fundamentals
+# Lab 3: Windows Support Fundamentals
 
-##1. Objective
+## 1. Objective
+
 Practice fundamental Windows IT support skills by monitoring system resource usage, inspecting running processes, checking Windows services, and verifying system components using PowerShell.
 
 The goal was to collect evidence, interpret results, and avoid making unnecessary system changes.
 
-##2. Environment
+## 2. Environment
 
 - Operating system: Windows on an HP laptop
 - Installed RAM: 8 GB
 - Tools used: Task Manager, Services console (services.msc), and Windows PowerShell
 - Changes made: No system settings or service configurations were changed.
 
-##3. Exercise 1 — Monitor System Resources
+## 3. Exercise 1 — Monitor System Resources
 
-###Procedure
+### Procedure
 
 1. Opened Task Manager using `Ctrl + Shift + Esc`.
 2. Selected the `Processes` tab.
 3. Recorded `CPU`, `memory`, `disk`, and `network utilization`.
 4. Observed `resource usage` while the computer was behaving normally.
 
-###Results
+### Results
 
 | Resource    | Observed Usage   |
 | ----------- | ---------------- |
@@ -31,14 +32,15 @@ The goal was to collect evidence, interpret results, and avoid making unnecessar
 | Network     | 0%               |
 | ----------- | ---------------- |
 
-###Interpretation
+### Interpretation
+
 CPU and disk utilization were low, memory usage was moderate, and network activity was idle at the time of observation.
 
 No obvious resource bottleneck was visible in this snapshot. These readings do not rule out intermittent problems or issues that occur under heavier workloads.
 
-##Exercise 2 — Identify Resource-Using Processes
+## Exercise 2 — Identify Resource-Using Processes
 
-###Memory investigation
+### Memory investigation
 
 Sorted processes by memory usage in Task Manager.
 
@@ -49,28 +51,32 @@ Sorted processes by memory usage in Task Manager.
 | Windows Explorer   | 57.9 MB      |
 | ------------------ | ------------ |
 
-###Interpretation
+### Interpretation
+
 Chrome used the most memory among the three observed processes. This did not establish that Chrome was faulty. Process usage must be considered alongside symptoms and overall system resources.
 
-###CPU investigation
+### CPU investigation
+
 Sorted processes by CPU usage and observed the leading entries.
 
 | Process            | Usage        |
 | ------------------ | ------------ |
 | Google Chrome      | 1.7%         |
-| Microsoft Defender | 0.8%         |
 | Windows Explorer   | 1.0%         |
+| Microsoft Defender | 0.8%         |
 | ------------------ | ------------ |
 
-###Interpretation
+### Interpretation
+
 All three readings were low. No obvious CPU bottleneck was identified.
 
-##Exercise 3 — Review Memory Details
+## Exercise 3 — Review Memory Details
 
-###Procedure
+### Procedure
+
 Opened Task Manager → Performance → Memory.
 
-###Results
+### Results
 
 | Memory metric      | Observed value |
 | ------------------ | -------------- |
@@ -81,23 +87,20 @@ Opened Task Manager → Performance → Memory.
 | Cached             | 1 GB           |
 | ------------------ | -------------- |
 
-###Interpretation
+### Interpretation
 
 - In use: Physical memory currently being used by Windows and applications.
-
 - Available: Memory that can be made available for applications, including reclaimable memory.
-
 - Committed: Virtual memory that Windows has committed, measured against its current commit limit. This is not the same as physical RAM usage.
-
 - Cached: Memory holding cached data that can help improve performance and can often be repurposed when needed.
 
 The readings did not indicate severe memory pressure at the time of testing. If a computer becomes slow when multiple applications are open, these measurements should be repeated during the slowdown.
 
-##Exercise 4 — Inspect Windows Services
+## Exercise 4 — Inspect Windows Services
 
 Opened the Services console using services.msc.
 
-###Windows Update
+### Windows Update
 
 | Property     | Observation         |
 | ------------ | ------------------- |
@@ -105,10 +108,11 @@ Opened the Services console using services.msc.
 | startup type | Manual              |
 | ------------ | ------------------- |
 
-###Interpretation
+### Interpretation
+
 The service was not running at the time of inspection. A Manual startup type can be normal and does not, by itself, indicate a fault.
 
-###DHCP CLient
+### DHCP CLient
 
 | Property     | Observation  |
 | ------------ | ------------ |
@@ -116,18 +120,19 @@ The service was not running at the time of inspection. A Manual startup type can
 | startup type | Automatic    |
 | ------------ | ------------ |
 
-###Interpretation
+### Interpretation
+
 DHCP Client was running and configured to start automatically. This is consistent with a typical Windows computer that obtains network configuration through DHCP.
 
-##Exercise 5 — Verify Service Status Using PowerShell
+## Exercise 5 — Verify Service Status Using PowerShell
 
-###Command
+### Command
 
 ```
 Get-Service -Name Dhcp
 ```
 
-###Result
+### Result
 
 ```
 Status   Name   DisplayName
@@ -135,29 +140,31 @@ Status   Name   DisplayName
 Running  Dhcp   DHCP Client
 ```
 
-###Interpretation
+### Interpretation
+
 PowerShell confirmed the DHCP Client service was running.
 
 This exercise demonstrated how to inspect a service using both a graphical interface and a command-line tool.
 
-##Exercise 6 — Distinguish SSH Client and Server
+## Exercise 6 — Distinguish SSH Client and Server
 
-###Check the SSH server service
+### Check the SSH server service
 
 ```
 Get-Service -Name sshd
 ```
 
-###Result
+### Result
+
 PowerShell reported that it could not find the service.
 
-###Check the SSH Client
+### Check the SSH Client
 
 ```
 Get-Command ssh.exe
 ```
 
-###Result
+### Result
 
 ```
 CommandType     Name            Version
@@ -165,20 +172,21 @@ CommandType     Name            Version
 Application     ssh.exe         x.x.x.x
 ```
 
-###Interpretation
+### Interpretation
+
 The SSH client allows this Windows computer to initiate SSH connections to remote systems. The SSH server accepts incoming SSH connections.
 
 The results showed that the client executable was available, while a service named sshd was not found. This is consistent with the Windows SSH Server feature not being installed, although the service check alone does not establish the full feature installation state.
 
 No installation or configuration changes were necessary for this exercise.
 
-##Exercise 7 — Memory Pressure and Hard Faults Investigation
+## Exercise 7 — Memory Pressure and Hard Faults Investigation
 
 Further investigated memory behavior using Resource Monitor and Task Manager.
 
 The purpose was to understand whether limited available RAM could contribute to sluggish performance when multiple applications and browser tabs were open.
 
-###Additional memory measurements
+### Additional memory measurements
 
 During the investigation:
 
@@ -189,28 +197,25 @@ During the investigation:
 | Committed memory | 8.7/13GB       |
 | ---------------- | -------------- |
 
-###Interpretation:
+### Interpretation:
 
 - Available memory had decreased to 1.7 GB.
-
 - Committed memory was 8.7 GB against a 13 GB commit limit.
-
 - Approximately 4.3 GB of commit capacity remained.
 
 These figures suggested relatively limited available physical memory, but did not independently establish severe memory pressure.
 
-###Hard Faults/sec
+### Hard Faults/sec
+
 Observed the Hard Faults/sec graph in Resource Monitor.
 
 Findings:
 
 - The graph displayed frequent spikes, sometimes reaching approximately 50–100.
-
 - During idle periods, hard faults were nearly zero.
-
 - Spikes occurred during application activity, including opening applications and switching browser tabs.
 
-###Interpretation:
+### Interpretation:
 
 A hard fault occurs when Windows needs a memory page that is not currently resident in physical RAM and must retrieve it from storage.
 
@@ -218,25 +223,23 @@ Hard faults are not necessarily errors. They can occur during normal system oper
 
 Frequent spikes alone do not prove harmful paging or insufficient RAM. Sustained activity accompanied by sluggish performance would warrant further investigation
 
-###Disk Activity
+### Disk Activity
 
 Observed disk activity through `Task Manager → Performance → Disk`.
 
 Findings:
 
 - Disk active time briefly increased to approximately 20% when switching between Chrome tabs.
-
 - Activity quickly returned close to zero.
-
 - No sustained high disk utilization was observed.
 
-###Interpretation:
+### Interpretation:
 
 The brief disk activity could have resulted from ordinary application activity, file access, or memory-related retrieval.
 
 The observations did not establish a sustained disk bottleneck or severe paging activity.
 
-##Exercise 8 — Chrome Tab Discarding Investigation
+## Exercise 8 — Chrome Tab Discarding Investigation
 
 Investigated Chrome's behavior when switching between recently used and inactive browser tabs.
 
@@ -249,12 +252,10 @@ Enabled internal debugging. Observed that some inactive tabs had been discarded.
 Findings:
 
 - Recently loaded tabs switched almost instantly.
-
 - Some inactive tabs were discarded by Chrome.
-
 - Returning to a discarded tab caused Chrome to reload its content.
 
-###Interpretation
+### Interpretation
 
 Chrome can deliberately discard inactive tabs to reduce its memory footprint.
 
@@ -264,27 +265,19 @@ The observation confirmed that Chrome was discarding inactive tabs, potentially 
 
 However, it did not prove that Windows was experiencing severe paging-related memory pressure.
 
-##Overall Findings
+## Overall Findings
 
 1. The investigation demonstrated several important Windows support concepts:
-
 2. High memory utilization does not automatically indicate a fault.
-
 3. Available memory includes free and reclaimable standby memory.
-
 4. Cached memory should not simply be added to available memory because the figures overlap.
-
 5. Committed memory measures virtual-memory commitment, not physical RAM usage alone.
-
 6. Hard faults can occur during normal operation and must be interpreted alongside other measurements.
-
 7. Sustained disk activity combined with high memory utilization and sluggish performance may indicate memory pressure.
-
 8. Chrome can independently discard inactive browser tabs to conserve memory.
-
 9. The presence of a service or executable must be interpreted in the context of its function.
 
-##Final assessment
+## Final assessment
 
 The laptop had relatively limited available physical memory during the additional investigation.
 
@@ -294,7 +287,7 @@ However, the collected evidence did not establish severe Windows paging or a per
 
 No configuration changes were necessary during this investigation.
 
-##Knowledge Check
+## Knowledge Check
 
 `Scenario`: A user reports that their computer slows down when they open several browser tabs. `CPU` usage is `12%`, `memory` usage is `94%`, and `disk` usage is `8%`.
 
@@ -302,49 +295,33 @@ No configuration changes were necessary during this investigation.
 
 `Reasoning`: High memory usage combined with the reported symptoms warrants further investigation. It does not automatically prove that RAM is the cause. The technician should gather additional evidence before recommending changes.
 
-##Key Lessons Learned
+## Key Lessons Learned
 
 - Collect baseline measurements before diagnosing a performance problem.
-
 - High resource usage is a clue, not proof of a fault.
-
 - Compare measurements with the user's symptoms and repeat tests when necessary.
-
 - A service that is stopped is not necessarily broken.
-
 - Startup type and current service status describe different things.
-
 - Use PowerShell to verify service information.
-
 - Distinguish between an SSH client and an SSH server.
-
 - Avoid unnecessary changes until evidence supports a diagnosis.
 
-##Key Skills Practiced
+## Key Skills Practiced
 
 - Windows Task Manager
-
 - Resource utilization analysis
-
 - Process investigation
-
 - Physical and virtual memory concepts
-
 - Windows service inspection
-
 - PowerShell service verification
-
 - SSH client versus server distinction
-
 - Resource Monitor
-
 - Hard faults/sec interpretation
-
 - Chrome tab memory management
-
 - Evidence-based troubleshooting
 
-##Conclusion
+## Conclusion
+
 This lab provided practical experience investigating Windows system behavior and performance.
 
 The main lesson was to avoid diagnosing problems based on a single measurement. Resource utilization, memory availability, disk activity, process behavior, and application-specific behavior should be considered together.
