@@ -8,7 +8,7 @@ The lab focused on applying practical security controls and verifying their effe
 
 ## 2. Lab Environment
 
-- Host Operating System: Windows 10
+- Host Operating System: Windows 10 22H2 (Legacy LAB Environment with ESU)
 - Virtualization software: VMware Workstation Player
 - Virtual Machine: Linux Mint
 - Network Mode: VMware NAT

@@ -6,7 +6,7 @@ Objective: Practice practical Windows IT support and troubleshooting techniques,
 
 Environment:
 
-- Operating System: Windows 10 Home, Version 22H2
+- Operating System: Windows 10 Home 22H2 (Legacy LAB Environment with ESU)
 - Hardware: HP laptop
 - Processor: AMD Ryzen 5 3500U
 - Memory: 8 GB RAM

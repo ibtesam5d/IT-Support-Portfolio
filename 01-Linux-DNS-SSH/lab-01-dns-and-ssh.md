@@ -32,7 +32,7 @@ Key finding: IP connectivity and DNS resolution are separate components of netwo
 
 ### 2. Listening Services and Port Inspection
 
-- Used sudo ss -tulnp to inspect listening TCP and UDP sockets.
+- Used `sudo ss -tulnp` to inspect listening TCP and UDP sockets.
 - Identified services and processes associated with listening ports, including systemd-resolved, CUPS, and Avahi.
 - Checked for an SSH listener on TCP port 22.
 
@@ -48,7 +48,7 @@ Key finding: A listening socket indicates that a process is accepting connection
 
 Key finding: Successful SSH access requires a functioning SSH server, network connectivity, an accessible listening port, and valid authentication.
 
-## Key Takeways
+## Key Takeaways
 
 - DNS resolution and IP connectivity are separate troubleshooting concerns.
 - DNS A, AAAA, and PTR records serve different purposes.

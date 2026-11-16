@@ -112,13 +112,12 @@ Opened the Services console using services.msc.
 
 The service was not running at the time of inspection. A Manual startup type can be normal and does not, by itself, indicate a fault.
 
-### DHCP CLient
+### DHCP Client
 
-| Property     | Observation  |
-| ------------ | ------------ |
-| Status       | Running      |
-| startup type | Automatic    |
-| ------------ | ------------ |
+| Property     | Observation |
+| ------------ | ----------- |
+| Status       | Running     |
+| startup type | Automatic   |
 
 ### Interpretation
 
