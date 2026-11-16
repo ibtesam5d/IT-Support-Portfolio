@@ -20,13 +20,15 @@ My approach emphasizes systematic troubleshooting:
 
 ## Completed Labs
 
-| Lab | Topic                                             | Key Skills                                              |
-| --- | ------------------------------------------------- | ------------------------------------------------------- |
-| 01  | DNS Troubleshooting and SSH Remote Administration | Linux, DNS, tcpdump, SSH                                |
-| 02  | Windows Network Diagnostics                       | PowerShell, DNS, TCP/IP, routing                        |
-| 03  | Windows System Monitoring                         | Task Manager, Resource Monitor, Windows services        |
-| 04  | Linux Firewall and SSH Security                   | UFW, SSH keys, firewall configuration                   |
-| 05  | Windows IT Support and Troubleshooting            | Event Viewer, PowerShell, services, network diagnostics |
+## Completed Labs
+
+| Lab | Topic                                                                                                                      | Key Skills                                              |
+| --- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| 01  | [DNS Troubleshooting and SSH Remote Administration](01-Linux-DNS-SSH/lab-01-dns-and-ssh.md)                                | Linux, DNS, tcpdump, SSH                                |
+| 02  | [Windows Network Diagnostics](02-Windows-Networking/lab-02-windows-network-troubleshooting.md)                             | PowerShell, DNS, TCP/IP, routing                        |
+| 03  | [Windows System Monitoring](03-Windows-System-Monitoring/lab-03-windows-support-fundamentals.md)                           | Task Manager, Resource Monitor, Windows services        |
+| 04  | [Linux Firewall and SSH Security](04-Linux-Firewall-SSH-Security/lab-04-linux-firewall-configuration-and-ssh-hardening.md) | UFW, SSH keys, firewall configuration                   |
+| 05  | [Windows IT Support and Troubleshooting](05-Windows-IT-Support/lab-05-windows-it-support-and-troubleshooting.md)           | Event Viewer, PowerShell, services, network diagnostics |
 
 ## Technical Skills Practiced
 
