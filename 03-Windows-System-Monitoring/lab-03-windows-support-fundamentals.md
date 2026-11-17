@@ -24,13 +24,12 @@ The goal was to collect evidence, interpret results, and avoid making unnecessar
 
 ### Results
 
-| Resource    | Observed Usage   |
-| ----------- | ---------------- |
-| CPU         | 8%               |
-| Memory      | 57%              |
-| Disk        | 1%               |
-| Network     | 0%               |
-| ----------- | ---------------- |
+| Resource | Observed Usage |
+| -------- | -------------- |
+| CPU      | 8%             |
+| Memory   | 57%            |
+| Disk     | 1%             |
+| Network  | 0%             |
 
 ### Interpretation
 
@@ -44,12 +43,11 @@ No obvious resource bottleneck was visible in this snapshot. These readings do n
 
 Sorted processes by memory usage in Task Manager.
 
-| Process            | Usage        |
-| ------------------ | ------------ |
-| Google Chrome      | 604 MB       |
-| Microsoft Defender | 204.2 MB     |
-| Windows Explorer   | 57.9 MB      |
-| ------------------ | ------------ |
+| Process            | Usage    |
+| ------------------ | -------- |
+| Google Chrome      | 604 MB   |
+| Microsoft Defender | 204.2 MB |
+| Windows Explorer   | 57.9 MB  |
 
 ### Interpretation
 
@@ -59,12 +57,11 @@ Chrome used the most memory among the three observed processes. This did not est
 
 Sorted processes by CPU usage and observed the leading entries.
 
-| Process            | Usage        |
-| ------------------ | ------------ |
-| Google Chrome      | 1.7%         |
-| Windows Explorer   | 1.0%         |
-| Microsoft Defender | 0.8%         |
-| ------------------ | ------------ |
+| Process            | Usage |
+| ------------------ | ----- |
+| Google Chrome      | 1.7%  |
+| Windows Explorer   | 1.0%  |
+| Microsoft Defender | 0.8%  |
 
 ### Interpretation
 
@@ -78,14 +75,13 @@ Opened Task Manager → Performance → Memory.
 
 ### Results
 
-| Memory metric      | Observed value |
-| ------------------ | -------------- |
-| Installed memory   | 8 GB           |
-| In Use             | 3.7 GB         |
-| Available          | 2.2 GB         |
-| Committed          | 6.3 / 13.7 GB  |
-| Cached             | 1 GB           |
-| ------------------ | -------------- |
+| Memory metric    | Observed value |
+| ---------------- | -------------- |
+| Installed memory | 8 GB           |
+| In Use           | 3.7 GB         |
+| Available        | 2.2 GB         |
+| Committed        | 6.3 / 13.7 GB  |
+| Cached           | 1 GB           |
 
 ### Interpretation
 
@@ -106,7 +102,6 @@ Opened the Services console using services.msc.
 | ------------ | ------------------- |
 | Status       | Blank / not running |
 | startup type | Manual              |
-| ------------ | ------------------- |
 
 ### Interpretation
 
@@ -194,7 +189,6 @@ During the investigation:
 | installed RAM    | 8 GB           |
 | Available RAM    | 1.7GB          |
 | Committed memory | 8.7/13GB       |
-| ---------------- | -------------- |
 
 ### Interpretation:
 
