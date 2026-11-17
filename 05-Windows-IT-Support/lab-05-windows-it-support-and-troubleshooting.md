@@ -23,7 +23,7 @@ Environment:
 
 ### Findings
 
-- Windows 10 Home, Version 22H2.
+- Windows 10 Home, Version 22H2 (Legacy LAB Environment with ESU)
 - OS Build 19045.
 - AMD Ryzen 5 3500U processor.
 - 4 physical cores and 8 logical processors.
@@ -70,6 +70,16 @@ A proper diagnosis would require correlating user-reported symptoms with memory 
 - Inspected the DHCP Client service.
 - Used PowerShell to inspect service status and configuration.
 
+![DHCP Service Status](./DHCP-Services.png)
+
+```
+Get-Service DHCP
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  DHCP               DHCP Client
+```
+
 ### Findings
 
 - DHCP Client service was running.
@@ -105,7 +115,6 @@ Investigate recurring Windows service errors and determine whether they represen
 
 During inspection of the Windows System event log, the following events were observed:
 
-- TPM-WMI Error 1796
 - Time-Service Warning 134
 - Service Control Manager Error 7024
 
@@ -118,6 +127,23 @@ The service had the following characteristics:
 - Executable path: Dropbox updater executable
 - Executable file existence: Confirmed using Test-Path
 - The same service error appeared repeatedly in historical event logs.
+
+![Dropbox Updater Service](./Dropbox-updater-service.png)
+
+```
+Log Name:      System
+Source:        Service Control Manager
+Date:          2026-11-09 9:28:50 AM
+Event ID:      7024
+Task Category: None
+Level:         Error
+Keywords:      Classic
+User:          N/A
+Computer:      LAPTOP-xxxxxxxx
+Description:
+The DropboxUpdater Service 123.0.6299.152 (DropboxUpdaterService123.0.6299.152) service terminated with the following service-specific error:
+%%45
+```
 
 ### Troubleshooting performed
 
